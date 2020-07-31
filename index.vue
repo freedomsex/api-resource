@@ -15,7 +15,7 @@ export default {
     resource: {
       name: null,
       api: null,
-      params: null,
+      params: {},
       data: null,
       path: null,
       uri: null,
@@ -81,7 +81,7 @@ export default {
         response = resource.load(params);
       }
       return response.then(({ data }) => {
-        if (params.id && !this.list) {
+        if (params.id) {
           this.item = data;
         } else {
           this.list = data;
