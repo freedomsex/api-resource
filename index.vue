@@ -65,7 +65,7 @@ export default {
       return prune(params);
     },
 
-    load(plain) {
+    async load(plain) {
       this.$nextTick(() => {
         this.$nuxt.$loading.start();
       });
@@ -73,22 +73,19 @@ export default {
       if (!plain) {
         params = _.assign({}, params, this.$route.query);
       }
-      let response;
       let resource = this.$api.res(name, api);
-      if (params.id) {
-        response = resource.get(params);
-      } else {
-        response = resource.load(params);
-      }
-      return response.then(({ data }) => {
+      try {
         if (params.id) {
+          let {data} = await resource.get(params);
           this.item = data;
         } else {
+          let {data} = await resource.load(params);
           this.list = data;
         }
-      }).finally(() => {
+      } finally {
         this.$nuxt.$loading.finish();
-      });
+      }
+      return data;
     },
     reload(reset) {
       if (reset) {
