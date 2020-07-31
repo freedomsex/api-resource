@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.5](https://github.com/freedomsex/api-resource/compare/v1.0.4...v1.0.5) (2020-07-31)
+
+
+### Bug Fixes
+
+* async-load ([557dadd](https://github.com/freedomsex/api-resource/commit/557dadd8fb8f4ca61b3fff622258d04e967c5d21))
+
 ### [1.0.4](https://github.com/freedomsex/api-resource/compare/v1.0.3...v1.0.4) (2020-07-31)
 
 
