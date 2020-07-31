@@ -46,7 +46,7 @@ export default {
   }),
   created() {
     let filters = JSON.parse(JSON.stringify(this.$route.query));
-    this.addFilters(filters);
+    this.setFilters(filters);
   },
   methods: {
     adaptParams(params) {
@@ -134,8 +134,11 @@ export default {
       this.clearFilters();
       this.addFilters(filters, back);
     },
-    addFilters(filters, back) {
+    setFilters(filters) {
       this.filters = _.assign(this.filters, filters);
+    },
+    addFilters(filters, back) {
+      this.setFilters(filters);
       this.fetch(back);
     },
     skipFilters(filters, back) {
