@@ -1,6 +1,5 @@
 <script>
 import _ from 'underscore';
-import Qs from 'qs';
 
 export default {
   // watchQuery: ['user', 'search', 'offset', 'order'],
@@ -47,41 +46,33 @@ export default {
   }),
   created() {
     let filters = JSON.parse(JSON.stringify(this.$route.query));
-    // this.filters = Object.assign(this.filters, query);
     this.addFilters(filters);
-  },
-  mounted () {
-
   },
   methods: {
     adaptParams(params) {
-      params = _.mapObject(params, value => {
-        if (_.isObject(value)) {
-          return _.pick(value, object => !_.isEmpty(object));
-        }
-        return value;
-      });
-      return _.pick(params, value => value !== '' && !_.isNull(value));
+      function prune(object) {
+        object = _.mapObject(object, value => {
+          if (_.isObject(value)) {
+            if (_.isEmpty(value)) {
+              return null;
+            }
+            return prune(value);
+          }
+          return value;
+        });
+        return _.pick(object, value => value !== '' && !_.isEmpty(value) && !_.isNull(value) && !_.isNaN(value) && !_.isUndefined(value));
+      }
+      return prune(params);
     },
 
     load(plain) {
-      // console.log('filters', this.filters);
       this.$nextTick(() => {
         this.$nuxt.$loading.start();
       });
       let {name, api, params} = this.resource;
-      // console.log('load $route.query', this.$route.query);
       if (!plain) {
         params = _.assign({}, params, this.$route.query);
       }
-      this.$api.setAxiosConfig({
-        paramsSerializer(params) {
-          return Qs.stringify(params, { arrayFormat: 'indices', encodeValuesOnly: true });
-        },
-      });
-      // console.log('params', [params, this.resource]);
-        // console.log('filters', this.filters);
-      // params = this.adaptParams(params);
       return this.$api.res(name, api).load(params).then(({ data }) => {
         if (params && params.id && !this.list) {
           this.item = data;
@@ -97,7 +88,7 @@ export default {
         this.clearFilters();
       }
       let query = this.adaptParams(this.filters);
-      // console.log('push query', query);
+      console.log(query);
       this.$router.push({
         path: this.path || this.uri,
         query,
