@@ -73,8 +73,15 @@ export default {
       if (!plain) {
         params = _.assign({}, params, this.$route.query);
       }
-      return this.$api.res(name, api).load(params).then(({ data }) => {
-        if (params && params.id && !this.list) {
+      let response;
+      let resource = this.$api.res(name, api);
+      if (params.id) {
+        response = resource.get(params);
+      } else {
+        response = resource.load(params);
+      }
+      return response.then(({ data }) => {
+        if (params.id && !this.list) {
           this.item = data;
         } else {
           this.list = data;
@@ -88,7 +95,6 @@ export default {
         this.clearFilters();
       }
       let query = this.adaptParams(this.filters);
-      console.log(query);
       this.$router.push({
         path: this.path || this.uri,
         query,
