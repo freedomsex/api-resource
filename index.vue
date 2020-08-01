@@ -60,7 +60,7 @@ export default {
           }
           return value;
         });
-        return _.pick(object, value => value !== '' && !_.isEmpty(value) && !_.isNull(value) && !_.isNaN(value) && !_.isUndefined(value));
+        return _.pick(object, value => value !== '' && (!_.isObject(value) || !_.isEmpty(value)) && !_.isNull(value) && !_.isNaN(value) && !_.isUndefined(value));
       }
       return prune(params);
     },
@@ -78,14 +78,15 @@ export default {
         if (params.id) {
           let {data} = await resource.get(params);
           this.item = data;
+          return data;
         } else {
           let {data} = await resource.load(params);
           this.list = data;
+          return data;
         }
       } finally {
         this.$nuxt.$loading.finish();
       }
-      return data;
     },
     reload(reset) {
       if (reset) {
