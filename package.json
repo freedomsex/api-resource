@@ -1,6 +1,6 @@
 {
   "name": "@freedomsex/api-resource",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Api Resource mixin for freedomsex project.",
   "main": "index.vue",
   "scripts": {
