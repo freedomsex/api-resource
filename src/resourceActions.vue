@@ -1,5 +1,5 @@
 <script>
-import pruner from 'params-pruner';
+import pruner from '@freedomsex/params-pruner';
 import apiFilters from './apiFilters.vue';
 
 export default {
