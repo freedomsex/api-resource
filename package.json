@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/freedomsex/api-resource/issues"
   },
-  "homepage": "https://github.com/freedomsex/api-resource#readme"
+  "homepage": "https://github.com/freedomsex/api-resource#readme",
+  "dependencies": {
+    "@freedomsex/params-pruner": "^1.0.0"
+  }
 }

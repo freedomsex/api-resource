@@ -1,5 +1,6 @@
 <script>
 import _ from 'underscore';
+import pruner from 'params-pruner';
 
 export default {
   // watchQuery: ['user', 'search', 'offset', 'order'],
@@ -49,22 +50,6 @@ export default {
     this.setFilters(filters);
   },
   methods: {
-    adaptParams(params) {
-      function prune(object) {
-        object = _.mapObject(object, value => {
-          if (_.isObject(value)) {
-            if (_.isEmpty(value)) {
-              return null;
-            }
-            return prune(value);
-          }
-          return value;
-        });
-        return _.pick(object, value => value !== '' && (!_.isObject(value) || !_.isEmpty(value)) && !_.isNull(value) && !_.isNaN(value) && !_.isUndefined(value));
-      }
-      return prune(params);
-    },
-
     async load(plain) {
       this.$nextTick(() => {
         this.$nuxt.$loading.start();
@@ -92,7 +77,7 @@ export default {
       if (reset) {
         this.clearFilters();
       }
-      let query = this.adaptParams(this.filters);
+      let query = pruner(this.filters);
       this.$router.push({
         path: this.path || this.uri,
         query,
@@ -159,7 +144,7 @@ export default {
 
     async update(id, params) {
       let {name, api} = this.resource;
-      let {data} = await this.$api.res(name, api).put(id, params);
+      let {data} = await this.$api.res(name, api).put(params, id);
       return data;
     },
   },
