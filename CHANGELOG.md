@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.10](https://github.com/freedomsex/api-resource/compare/v1.0.9...v1.0.10) (2020-08-15)
+
+
+### Bug Fixes
+
+* refactor ([5ef1164](https://github.com/freedomsex/api-resource/commit/5ef11647bf4230001a67d1c02f9049fa83f2cf4f))
+
 ### [1.0.9](https://github.com/freedomsex/api-resource/compare/v1.0.8...v1.0.9) (2020-08-15)
 
 
