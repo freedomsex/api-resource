@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/freedomsex/api-resource/compare/v1.0.14...v2.0.0) (2020-08-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename item operations createItem, updateItem, removeItem ...
+
+### Features
+
+* item operations ([f62f2ea](https://github.com/freedomsex/api-resource/commit/f62f2ea7b5672faf0ee9b8980ebaf3c7e646348a))
+
 ### [1.0.14](https://github.com/freedomsex/api-resource/compare/v1.0.13...v1.0.14) (2020-08-16)
 
 
