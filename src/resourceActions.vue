@@ -1,4 +1,5 @@
 <script>
+import _ from 'underscore';
 import pruner from '@freedomsex/params-pruner';
 import apiFilters from './apiFilters.vue';
 
