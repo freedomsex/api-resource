@@ -1,20 +1,19 @@
 <script>
 export default {
   methods: {
-    async create(params) {
+    async createItem(data) {
       let {name, api} = this.resource;
-      let {data} = await this.$api.res(name, api).post(params);
-      return data;
+      let {data: entity} = await this.$api.res(name, api).post(data);
+      return entity;
     },
-    async update(id, params) {
+    async updateItem(data, params) {
       let {name, api} = this.resource;
-      let {data} = await this.$api.res(name, api).put(params, id);
-      return data;
+      let {data: entity} = await this.$api.res(name, api).put(data, params);
+      return entity;
     },
-    async remove(id) {
+    async removeItem(params) {
       let {name, api} = this.resource;
-      let {data} = await this.$api.res(name, api).delete(id);
-      return data;
+      await this.$api.res(name, api).delete(params);
     },
   },
 };
