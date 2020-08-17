@@ -25,25 +25,38 @@ export default {
       this.$nextTick(() => {
         this.$nuxt.$loading.start();
       });
-      let {name, api, params} = this.resource;
+      let { params } = this.resource;
       if (!plain) {
         params = _.assign({}, params, this.$route.query);
       }
-      let resource = this.$api.res(name, api);
+      if (params.id) {
+        return await this.loadList(params);
+      } else {
+        return await this.loadItem(params);
+      }
+    },
+
+    async loadList(params) {
+      let {name, api} = this.resource;
       try {
-        if (params.id) {
-          let {data} = await resource.get(params);
-          this.item = data;
-          return data;
-        } else {
-          let {data} = await resource.load(params);
-          this.list = data;
-          return data;
-        }
+        let {data} = await this.$api.res(name, api).get(params);
+        this.item = data;
+        return data;
       } finally {
         this.$nuxt.$loading.finish();
       }
     },
+    async loadItem(params) {
+      let {name, api} = this.resource;
+      try {
+        let {data} = await this.$api.res(name, api).load(params);
+        this.list = data;
+        return data;
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
+    },
+
     reload(reset) {
       if (reset) {
         this.clearFilters();
