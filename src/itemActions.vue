@@ -1,4 +1,6 @@
 <script>
+import _ from 'underscore';
+
 export default {
   methods: {
     async createItem(data) {
