@@ -15,6 +15,15 @@ export default {
       let {name, api} = this.resource;
       await this.$api.res(name, api).delete(params);
     },
+
+    changedItem(item) {
+      _.map(this.list, (element, index) => {
+        if (item.id == element.id) {
+          this.list.splice(index, 1, item);
+        }
+      });
+    },
+
   },
 };
 </script>
