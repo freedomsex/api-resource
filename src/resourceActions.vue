@@ -2,9 +2,11 @@
 import _ from 'underscore';
 import pruner from '@freedomsex/params-pruner';
 import apiFilters from './apiFilters.vue';
+import hooks from './hooks';
 
 export default {
   mixins: [
+    hooks,
     apiFilters,
   ],
   data: () => ({
@@ -25,6 +27,7 @@ export default {
       this.$nextTick(() => {
         this.$nuxt.$loading.start();
       });
+      this.beforeLoad();
       let { params } = this.resource;
       if (!plain) {
         params = _.assign({}, params, this.$route.query);
@@ -45,6 +48,7 @@ export default {
       } finally {
         this.$nuxt.$loading.finish();
       }
+      this.afterLoad();
     },
     async loadItem(params) {
       let {name, api} = this.resource;
@@ -55,6 +59,7 @@ export default {
       } finally {
         this.$nuxt.$loading.finish();
       }
+      this.afterLoad();
     },
 
     reload(reset) {
