@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/freedomsex/api-resource/compare/v2.1.1...v2.2.0) (2020-08-24)
+
+
+### Features
+
+* hooks ([c09a422](https://github.com/freedomsex/api-resource/commit/c09a42248cfc765e93b4a72485877fbcc046c9f0))
+
 ### [2.1.1](https://github.com/freedomsex/api-resource/compare/v2.1.0...v2.1.1) (2020-08-17)
 
 
