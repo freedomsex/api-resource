@@ -5,7 +5,7 @@ export default {
       minimun: 5,
     },
   }),
-  methods: {
+  computed: {
     countItems() {
       return this.list ? this.list.length : 0;
     },
