@@ -3,10 +3,12 @@ import _ from 'underscore';
 import pruner from '@freedomsex/params-pruner';
 import apiFilters from './apiFilters.vue';
 import hooks from './hooks';
+import pagination from './pagination';
 
 export default {
   mixins: [
     hooks,
+    pagination,
     apiFilters,
   ],
   data: () => ({
