@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/freedomsex/api-resource/compare/v2.2.0...v2.3.0) (2020-08-25)
+
+
+### Features
+
+* pagination props ([4b7d3db](https://github.com/freedomsex/api-resource/commit/4b7d3dbf7f11d567a14802f1e86fa19112f2843c))
+
 ## [2.2.0](https://github.com/freedomsex/api-resource/compare/v2.1.1...v2.2.0) (2020-08-24)
 
 
