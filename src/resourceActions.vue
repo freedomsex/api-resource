@@ -23,9 +23,12 @@ export default {
     },
     list: [],
     item: {},
+    loading: false,
+    error: false,
   }),
   methods: {
     async load(plain) {
+      this.loading = true;
       this.$nextTick(() => {
         this.$nuxt.$loading.start();
       });
@@ -46,8 +49,11 @@ export default {
       try {
         let {data} = await this.$api.res(name, api).get(params);
         this.item = data;
+      } catch(error) {
+        this.error = error;
       } finally {
         this.$nuxt.$loading.finish();
+        this.loading = false;
         this.aftreError();
       }
       this.afterLoad();
@@ -58,8 +64,11 @@ export default {
       try {
         let {data} = await this.$api.res(name, api).load(params);
         this.list = data;
+      } catch(error) {
+        this.error = error;
       } finally {
         this.$nuxt.$loading.finish();
+        this.loading = false;
         this.aftreError();
       }
       this.afterLoad();
