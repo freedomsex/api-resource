@@ -54,7 +54,7 @@ export default {
       } finally {
         this.$nuxt.$loading.finish();
         this.loading = false;
-        this.aftreError();
+        this.afterError();
       }
       this.afterLoad();
       return data;
@@ -69,7 +69,7 @@ export default {
       } finally {
         this.$nuxt.$loading.finish();
         this.loading = false;
-        this.aftreError();
+        this.afterError();
       }
       this.afterLoad();
       return data;
