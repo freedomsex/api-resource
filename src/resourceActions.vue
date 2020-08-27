@@ -46,22 +46,24 @@ export default {
       try {
         let {data} = await this.$api.res(name, api).get(params);
         this.item = data;
-        return data;
       } finally {
         this.$nuxt.$loading.finish();
+        this.aftreError();
       }
       this.afterLoad();
+      return data;
     },
     async loadItem(params) {
       let {name, api} = this.resource;
       try {
         let {data} = await this.$api.res(name, api).load(params);
         this.list = data;
-        return data;
       } finally {
         this.$nuxt.$loading.finish();
+        this.aftreError();
       }
       this.afterLoad();
+      return data;
     },
 
     reload(reset) {
