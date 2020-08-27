@@ -46,8 +46,9 @@ export default {
 
     async loadList(params) {
       let {name, api} = this.resource;
+      let data = null;
       try {
-        let {data} = await this.$api.res(name, api).get(params);
+        ({data} = await this.$api.res(name, api).get(params));
         this.item = data;
       } catch(error) {
         this.error = error;
@@ -61,8 +62,9 @@ export default {
     },
     async loadItem(params) {
       let {name, api} = this.resource;
+      let data = null;
       try {
-        let {data} = await this.$api.res(name, api).load(params);
+        ({data} = await this.$api.res(name, api).load(params));
         this.list = data;
       } catch(error) {
         this.error = error;
