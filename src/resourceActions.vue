@@ -40,7 +40,7 @@ export default {
       if (params.id) {
         return await this.loadItem(params);
       } else {
-        return await this.loadLest(params);
+        return await this.loadList(params);
       }
     },
 
