@@ -44,7 +44,7 @@ export default {
       }
     },
 
-    async loadList(params) {
+    async loadItem(params) {
       let {name, api} = this.resource;
       let data = null;
       try {
@@ -60,7 +60,7 @@ export default {
       this.afterLoad();
       return data;
     },
-    async loadItem(params) {
+    async loadList(params) {
       let {name, api} = this.resource;
       let data = null;
       try {
