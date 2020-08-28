@@ -15,5 +15,8 @@ export default {
     shortList() {
       return this.countItems <= this.pagination.minimun;
     },
+    emptyList() {
+      return !this.countItems && !this.error;
+    },
   },
 }
