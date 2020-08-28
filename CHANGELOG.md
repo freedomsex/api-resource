@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.6](https://github.com/freedomsex/api-resource/compare/v2.3.5...v2.3.6) (2020-08-28)
+
+
+### Bug Fixes
+
+* emptyList prop ([7be3271](https://github.com/freedomsex/api-resource/commit/7be327178166bf0fe1cf38bcbe354a852cdba1ab))
+
 ### [2.3.5](https://github.com/freedomsex/api-resource/compare/v2.3.4...v2.3.5) (2020-08-27)
 
 
