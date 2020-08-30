@@ -21,9 +21,13 @@ export default {
     changedItem(item) {
       _.map(this.list, (element, index) => {
         if (item.id == element.id) {
-          this.list.splice(index, 1, item);
+          this.rewriteItem(index, item);
         }
       });
+    },
+
+    rewriteItem(index, item) {
+      this.list.splice(index, 1, item);
     },
 
   },
