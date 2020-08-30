@@ -27,7 +27,11 @@ export default {
     },
 
     rewriteItem(index, item) {
-      this.list.splice(index, 1, item);
+      if (item) {
+        this.list.splice(index, 1, item);
+      } else {
+        this.list.splice(index, 1);
+      }
     },
 
   },
