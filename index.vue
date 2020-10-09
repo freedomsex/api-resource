@@ -1,8 +1,9 @@
 <script>
 import _ from 'underscore';
 
-import resourceActions from './src/resourceActions.vue';
-import itemActions from './src/itemActions.vue';
+import ResourceActions from './src/ResourceActions.vue';
+import ItemActions from './src/ItemActions.vue';
+import CachedResource from './src/CachedResource.vue';
 
 export default {
   // watchQuery: ['user', 'search', 'offset', 'order'],
@@ -12,8 +13,9 @@ export default {
     },
   },
   mixins: [
-    resourceActions,
-    itemActions,
+    ResourceActions,
+    ItemActions,
+    CachedResource
   ],
   methods: {
     suggest: _.debounce(function () {

@@ -6,9 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "@freedomsex/params-pruner": "^1.0.0"
+  },
   "peerDependencies": {
     "axios": "^0.19.2",
-    "axios-rest-api": "^1.1.15"
+    "axios-rest-api": "^1.1.15",
+    "@freedomsex/cache-service": "^0.0.3"
   },
   "repository": {
     "type": "git",
@@ -19,8 +23,5 @@
   "bugs": {
     "url": "https://github.com/freedomsex/api-resource/issues"
   },
-  "homepage": "https://github.com/freedomsex/api-resource#readme",
-  "dependencies": {
-    "@freedomsex/params-pruner": "^1.0.0"
-  }
+  "homepage": "https://github.com/freedomsex/api-resource#readme"
 }
