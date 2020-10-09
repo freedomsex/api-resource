@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/freedomsex/api-resource/compare/v2.3.12...v2.4.0) (2020-10-09)
+
+
+### Features
+
+* cached resource. rename files. cache service ([b5a009f](https://github.com/freedomsex/api-resource/commit/b5a009f1fa3a3e51eb5a3ef71a6b91b9108cd2d2))
+
 ### [2.3.12](https://github.com/freedomsex/api-resource/compare/v2.3.11...v2.3.12) (2020-08-30)
 
 
