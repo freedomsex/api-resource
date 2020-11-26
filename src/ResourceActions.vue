@@ -37,7 +37,7 @@ export default {
       if (!plain) {
         params = _.assign({}, params, this.$route.query);
       }
-      if (params.id) {
+      if (this.resource.params.id) {
         return await this.loadItem(params);
       } else {
         return await this.loadList(params);
