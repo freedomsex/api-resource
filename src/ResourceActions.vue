@@ -97,7 +97,7 @@ export default {
       if (reset) {
         this.clearFilters();
       }
-      this.$router.push(this.nextRoute());
+      this.$router.push(this.nextRoute;
     },
     refresh() {
       this.filters.t = +new Date();
