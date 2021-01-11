@@ -94,11 +94,14 @@ export default {
       this.filters.t = +new Date();
       this.reload();
     },
-    next() {
+    next(link) {
       if (!this.filters.page) {
         this.filters.page = 1;
       }
       this.filters.page = Number(this.filters.page) + 1;
+      if (link) {
+        return this.nextRoute();
+      }
       this.reload();
     },
     back() {
