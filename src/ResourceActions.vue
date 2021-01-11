@@ -26,6 +26,23 @@ export default {
     loading: false,
     error: false,
   }),
+  computed: {
+    nextRoute() {
+      let query = Pruner(this.filters);
+      return {
+        path: this.path || this.uri,
+        query,
+      };
+    },
+    nextPage() {
+      let route = this.nextRoute;
+      if (!route.query.page) {
+        route.query.page = 1;
+      }
+      route.query.page = Number(route.query.page) + 1;
+      return route;
+    },
+  },
   methods: {
     async load(plain) {
       this.loading = true;
@@ -76,14 +93,6 @@ export default {
       this.afterLoad();
       return data;
     },
-
-    nextRoute() {
-      let query = Pruner(this.filters);
-      return {
-        path: this.path || this.uri,
-        query,
-      };
-    },
     reload(reset) {
       if (reset) {
         this.clearFilters();
@@ -99,9 +108,6 @@ export default {
         this.filters.page = 1;
       }
       this.filters.page = Number(this.filters.page) + 1;
-      if (link) {
-        return this.nextRoute();
-      }
       this.reload();
     },
     back() {
