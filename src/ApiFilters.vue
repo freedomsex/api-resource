@@ -24,11 +24,20 @@ export default {
     t: null,
   },
   }),
-  created() {
-    let filters = JSON.parse(JSON.stringify(this.$route.query));
-    this.setFilters(filters);
+  watch: {
+    '$route.query': {
+      handler() {
+        this.parseFilters();
+      },
+      immediate: true,
+    },
   },
+  created() { },
   methods: {
+    parseFilters() {
+      let filters = JSON.parse(JSON.stringify(this.$route.query));
+      this.setFilters(filters);
+    },
     clearFilters(filters) {
       this.filters = _.mapObject(this.filters, (value) => {
         if (_.isObject(value)) {
