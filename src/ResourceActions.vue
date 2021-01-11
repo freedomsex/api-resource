@@ -77,15 +77,18 @@ export default {
       return data;
     },
 
+    nextRoute() {
+      let query = Pruner(this.filters);
+      return {
+        path: this.path || this.uri,
+        query,
+      };
+    },
     reload(reset) {
       if (reset) {
         this.clearFilters();
       }
-      let query = Pruner(this.filters);
-      this.$router.push({
-        path: this.path || this.uri,
-        query,
-      });
+      this.$router.push(this.nextRoute());
     },
     refresh() {
       this.filters.t = +new Date();
