@@ -27,15 +27,8 @@ export default {
     error: false,
   }),
   computed: {
-    nextRoute() {
-      let query = Pruner(this.filters);
-      return {
-        path: this.path || this.uri,
-        query,
-      };
-    },
     nextPage() {
-      let route = this.nextRoute;
+      let route = this.nextRoute();
       if (!route.query.page) {
         route.query.page = 1;
       }
@@ -93,11 +86,18 @@ export default {
       this.afterLoad();
       return data;
     },
+    nextRoute() {
+      let query = Pruner(this.filters);
+      return {
+        path: this.path || this.uri,
+        query,
+      };
+    },
     reload(reset) {
       if (reset) {
         this.clearFilters();
       }
-      this.$router.push(this.nextRoute);
+      this.$router.push(this.nextRoute());
     },
     refresh() {
       this.filters.t = +new Date();
