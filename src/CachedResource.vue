@@ -1,39 +1,39 @@
 <script>
 export default {
   methods: {
-    cacheItemKey(id) {
-      return `cached-resource__${this.resource.name}__${id}`;
+    cacheItemKey(id, name) {
+      return `cached-resource__${name || this.resource.name}__${id}`;
     },
-    cacheListKey() {
-      return `cached-resource__${this.resource.name}__list`;
+    cacheListKey(name) {
+      return `cached-resource__${name || this.resource.name}__list`;
     },
-    async restoreItem() {
-      let key = this.cacheItemKey(this.resource.params.id);
+    async restoreItem(name) {
+      let key = this.cacheItemKey(this.resource.params.id, name);
       this.item = await this.$cache.load(key, this.item);
     },
-    async restoreList() {
-      let key = this.cacheListKey();
+    async restoreList(name) {
+      let key = this.cacheListKey(name);
       this.list = await this.$cache.load(key, this.list);
     },
-    cacheItem() {
-      let key = this.cacheItemKey(this.item.id);
+    cacheItem(name) {
+      let key = this.cacheItemKey(this.item.id, name);
       this.$cache.save(key, this.item);
     },
-    cacheList() {
-      let key = this.cacheListKey();
+    cacheList(name) {
+      let key = this.cacheListKey(name);
       this.$cache.save(key, this.list);
     },
 
-    async loadCached(id) {
+    async loadCached(id, name) {
       this.resource.params.id = id;
-      await this.restoreItem();
+      await this.restoreItem(name);
       await this.load();
-      this.cacheItem();
+      this.cacheItem(name);
     },
-    async cachedList() {
-      await this.restoreList();
+    async cachedList(name) {
+      await this.restoreList(name);
       await this.load();
-      this.cacheList();
+      this.cacheList(name);
     },
   },
 }
