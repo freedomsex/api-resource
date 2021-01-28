@@ -3,26 +3,26 @@ import _ from 'underscore';
 
 export default {
   data: () => ({
-  filters: {
-    userId: null,
-    search: null,
-    order: null,
-    period: null,
-    offset: null,
-    all: null,
-    hash: null,
-    ipaddr: null,
-    page: null,
-    added: {
-      before: null,
-      after: null,
+    filters: {
+      userId: null,
+      search: null,
+      order: null,
+      period: null,
+      offset: null,
+      all: null,
+      hash: null,
+      ipaddr: null,
+      page: null,
+      added: {
+        before: null,
+        after: null,
+      },
+      updated: {
+        before: null,
+        after: null,
+      },
+      t: null,
     },
-    updated: {
-      before: null,
-      after: null,
-    },
-    t: null,
-  },
   }),
   watch: {
     '$route.query': {
