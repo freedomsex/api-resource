@@ -19,6 +19,7 @@ export default {
   },
   data: () => ({
     queryFilters: [],
+    layoutItems: null,
     stopQueryWatch: false,
   }),
   mixins: [
@@ -26,6 +27,9 @@ export default {
     ItemActions,
     CachedResource
   ],
+  created() {
+    this.fillDummyItems();
+  },
   methods: {
     watchQueryAction() {
       !this.stopQueryWatch && this.onWatchQuery();
@@ -42,6 +46,18 @@ export default {
         }
       }
       return false;
+    },
+    fillDummyItems() {
+      if (this.list.length) {
+        return;
+      }
+      if (this.layoutItems) {
+        let values = new Array(this.layoutItems);
+        let i = 0;
+        for (let item of values) {
+          this.list.push({id: ++i});
+        }
+      }
     },
     suggest: _.debounce(function () {
       this.back();
