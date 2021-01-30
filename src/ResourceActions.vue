@@ -62,10 +62,10 @@ export default {
         this.item = data;
       } catch(error) {
         this.error = error;
+        this.afterError();
       } finally {
         this.$nuxt.$loading.finish();
         this.loading = false;
-        this.afterError();
       }
       this.afterLoad();
       return data;
