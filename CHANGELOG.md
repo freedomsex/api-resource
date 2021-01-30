@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.14](https://github.com/freedomsex/api-resource/compare/v2.4.13...v2.4.14) (2021-01-30)
+
+
+### Bug Fixes
+
+* after error param ([e87d178](https://github.com/freedomsex/api-resource/commit/e87d178aa70a5b0c61de5382037fced6cec83ce9))
+
 ### [2.4.13](https://github.com/freedomsex/api-resource/compare/v2.4.12...v2.4.13) (2021-01-30)
 
 
