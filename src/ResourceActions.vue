@@ -40,7 +40,9 @@ export default {
     async load(plain) {
       this.loading = true;
       this.$nextTick(() => {
-        this.$nuxt.$loading.start();
+        if (process.client) {
+          this.$nuxt.$loading.start();
+        }
       });
       this.beforeLoad();
       let { params } = this.resource;
@@ -64,7 +66,9 @@ export default {
         this.error = error;
         this.afterError(error);
       } finally {
-        this.$nuxt.$loading.finish();
+        if (process.client) {
+          this.$nuxt.$loading.finish();
+        }
         this.loading = false;
       }
       this.afterLoad();
@@ -79,7 +83,9 @@ export default {
       } catch(error) {
         this.error = error;
       } finally {
-        this.$nuxt.$loading.finish();
+        if (process.client) {
+          this.$nuxt.$loading.finish();
+        }
         this.loading = false;
         this.afterError();
       }
