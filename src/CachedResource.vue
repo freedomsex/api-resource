@@ -24,15 +24,19 @@ export default {
       this.$cache.save(key, this.list);
     },
 
-    async loadCached(id, name) {
+    async loadCached(id, name, force) {
       this.resource.params.id = id;
-      await this.restoreItem(name);
-      await this.load();
+      if (force || !this.item.id) {
+        await this.restoreItem(name);
+        await this.load();
+      }
       this.cacheItem(name);
     },
-    async cachedList(name) {
-      await this.restoreList(name);
-      await this.load();
+    async cachedList(name, force) {
+      if (force || !this.list.length) {
+        await this.restoreList(name);
+        await this.load();
+      }
       this.cacheList(name);
     },
   },
