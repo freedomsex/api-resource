@@ -18,19 +18,21 @@ export default {
       await this.$api.res(name, api).delete(params);
     },
 
-    changedItem(item) {
-      _.map(this.list, (element, index) => {
+    changedItem(item, items) {
+      let list = items || this.list;
+      _.map(list, (element, index) => {
         if (item.id == element.id) {
-          this.rewriteItem(index, item);
+          this.rewriteItem(index, item, list);
         }
       });
     },
 
-    rewriteItem(index, item) {
+    rewriteItem(index, item, items) {
+      let list = items || this.list;
       if (item) {
-        this.list.splice(index, 1, item);
+        list.splice(index, 1, item);
       } else {
-        this.list.splice(index, 1);
+        list.splice(index, 1);
       }
     },
 
