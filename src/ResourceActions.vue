@@ -20,6 +20,7 @@ export default {
       path: null,
       uri: null,
       list: false,
+      cache: '',
     },
     list: [],
     item: {},

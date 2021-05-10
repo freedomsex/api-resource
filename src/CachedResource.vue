@@ -1,11 +1,19 @@
 <script>
 export default {
   methods: {
+    cacheName(title) {
+      let cache = '';
+      let name = '';
+      if (this.resource) {
+        let {cache, name} = this.resource;
+      }
+      return cache || title || name;
+    },
     cacheItemKey(id, name) {
-      return `cached-resource__${name || this.resource.name}__${id}`;
+      return `cached-resource__${this.cacheName(name)}__${id}`;
     },
     cacheListKey(name) {
-      return `cached-resource__${name || this.resource.name}__list`;
+      return `cached-resource__${this.cacheName(name)}__list`;
     },
     async restoreItem(name) {
       let key = this.cacheItemKey(this.resource.params.id, name);
@@ -26,8 +34,10 @@ export default {
 
     async loadCached(id, name, force) {
       this.resource.params.id = id;
-      if (force || !this.item.id) {
+      if (force || this.isTemplateList || !this.item.id) {
         await this.restoreItem(name);
+      }
+      if (force || !this.item.id) {
         await this.load();
       }
       this.isTemplateList = false;
@@ -37,11 +47,22 @@ export default {
       if (force || this.isTemplateList || !this.list.length) {
         await this.restoreList(name);
       }
-      if (force) {
+      if (force || !this.list.length) {
         await this.load();
       }
       this.isTemplateList = false;
       this.cacheList(name);
+    },
+
+    preCacheList(name) {
+      if (this.list.length && !this.isTemplateList) {
+        this.cacheList(name);
+      }
+    },
+    preCacheItem(name) {
+      if (this.item && !this.isTemplateList) {
+        this.cacheItem(name);
+      }
     },
   },
 }
