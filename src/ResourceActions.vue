@@ -54,6 +54,7 @@ export default {
       } else {
         return await this.loadList(params);
       }
+      this.isTemplateList = false;
     },
 
     async loadItem(params) {

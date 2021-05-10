@@ -20,6 +20,7 @@ export default {
   data: () => ({
     queryFilters: [],
     layoutItems: null,
+    isTemplateList: false,
     stopQueryWatch: false,
   }),
   mixins: [
@@ -57,6 +58,7 @@ export default {
         for (let item of values) {
           this.list.push({id: ++i});
         }
+        this.isTemplateList = true;
       }
     },
     suggest: _.debounce(function () {

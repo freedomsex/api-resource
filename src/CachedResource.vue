@@ -30,13 +30,17 @@ export default {
         await this.restoreItem(name);
         await this.load();
       }
+      this.isTemplateList = false;
       this.cacheItem(name);
     },
     async cachedList(name, force) {
-      if (force || !this.list.length) {
+      if (force || this.isTemplateList || !this.list.length) {
         await this.restoreList(name);
+      }
+      if (force) {
         await this.load();
       }
+      this.isTemplateList = false;
       this.cacheList(name);
     },
   },
