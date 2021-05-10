@@ -5,7 +5,7 @@ export default {
       let cache = '';
       let name = '';
       if (this.resource) {
-        let {cache, name} = this.resource;
+        ({cache, name} = this.resource);
       }
       return cache || title || name;
     },
