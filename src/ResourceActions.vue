@@ -38,7 +38,7 @@ export default {
     },
   },
   methods: {
-    async load(plain) {
+    async load(ignoreFilters) {
       this.loading = true;
       this.$nextTick(() => {
         if (process.client) {
@@ -47,7 +47,7 @@ export default {
       });
       this.beforeLoad();
       let { params } = this.resource;
-      if (!plain) {
+      if (!ignoreFilters && !this.ignoreFilters) {
         params = _.assign({}, params, this.$route.query);
       }
       let data = null;

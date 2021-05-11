@@ -22,6 +22,7 @@ export default {
     layoutItems: null,
     isTemplateList: false,
     stopQueryWatch: false,
+    ignoreFilters: false,
   }),
   mixins: [
     ResourceActions,
