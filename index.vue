@@ -23,6 +23,7 @@ export default {
     isTemplateList: false,
     stopQueryWatch: false,
     ignoreFilters: false,
+    infiniteListData: false,
   }),
   mixins: [
     ResourceActions,

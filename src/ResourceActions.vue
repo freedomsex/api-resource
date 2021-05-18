@@ -83,7 +83,11 @@ export default {
       let data = null;
       try {
         ({data} = await this.$api.res(name, api).load(params));
-        this.list = data;
+        if (this.infiniteListData) {
+          this.list.push(data);
+        } else {
+          this.list = data;
+        }
       } catch(error) {
         this.error = error;
       } finally {
@@ -103,22 +107,30 @@ export default {
         query,
       };
     },
-    reload(reset) {
+    async reload(reset, ignoreFilters) {
       if (reset) {
         this.clearFilters();
       }
-      this.$router.push(this.nextRoute());
+      if (this.infiniteListData) {
+        return await this.load(ignoreFilters);
+      } else {
+        this.$router.push(this.nextRoute());
+      }
+      return null;
     },
     refresh() {
       this.filters.t = +new Date();
       this.reload();
     },
-    next(link) {
+    async next(link) {
       if (!this.filters.page) {
         this.filters.page = 1;
       }
       this.filters.page = Number(this.filters.page) + 1;
-      this.reload();
+      if (this.infiniteListData) {
+        this.resource.params.page = this.filters.page;
+      }
+      return await this.reload();
     },
     back() {
       this.filters.page = null;
