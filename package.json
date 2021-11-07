@@ -9,7 +9,7 @@
   "dependencies": {
     "@freedomsex/params-pruner": "^1.0.0"
   },
-  "peerDependencies": {
+  "optionalDependencies": {
     "axios": "^0.19.2",
     "axios-rest-api": "^1.1.15",
     "@freedomsex/cache-service": "^0.0.3"
