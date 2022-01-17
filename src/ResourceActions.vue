@@ -80,7 +80,7 @@ export default {
       return data;
     },
     async loadList(params) {
-      let {name, api} = this.resource;
+      let {name, api, isPublic} = this.resource;
       let data = null;
       try {
         ({data} = await this.$api.res(name, api, isPublic).load(params));
