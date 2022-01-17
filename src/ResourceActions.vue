@@ -21,6 +21,7 @@ export default {
       uri: null,
       list: false,
       cache: '',
+      isPublic: false,
     },
     list: [],
     item: {},
@@ -61,10 +62,10 @@ export default {
     },
 
     async loadItem(params) {
-      let {name, api} = this.resource;
+      let {name, api, isPublic} = this.resource;
       let data = null;
       try {
-        ({data} = await this.$api.res(name, api).get(params));
+        ({data} = await this.$api.res(name, api, isPublic).get(params));
         this.item = data;
       } catch(error) {
         this.error = error;
@@ -82,7 +83,7 @@ export default {
       let {name, api} = this.resource;
       let data = null;
       try {
-        ({data} = await this.$api.res(name, api).load(params));
+        ({data} = await this.$api.res(name, api, isPublic).load(params));
         if (this.infiniteListData) {
           this.list.push(data);
         } else {
