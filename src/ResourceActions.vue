@@ -23,6 +23,7 @@ export default {
       cache: '',
       isPublic: false,
     },
+    subresource: null,
     list: [],
     item: {},
     loading: false,
@@ -65,7 +66,13 @@ export default {
       let {name, api, isPublic} = this.resource;
       let data = null;
       try {
-        ({data} = await this.$api.res(name, api, isPublic).get(params));
+        let subId;
+        let subPath;
+        if (this.subresource) {
+          subId = this.subresource.id;
+          subPath = this.subresource.path;
+        }
+        ({data} = await this.$api.res(name, api, isPublic).sub(subPath, subId).get(params));
         this.item = data;
       } catch(error) {
         this.error = error;
@@ -79,6 +86,7 @@ export default {
       this.afterLoad();
       return data;
     },
+
     async loadList(params) {
       let {name, api, isPublic} = this.resource;
       let data = null;
@@ -101,6 +109,7 @@ export default {
       this.afterLoad();
       return data;
     },
+
     nextRoute() {
       let query = Pruner(this.filters);
       return {
@@ -108,6 +117,7 @@ export default {
         query,
       };
     },
+
     async reload(reset, ignoreFilters) {
       if (reset) {
         this.clearFilters();
@@ -119,10 +129,12 @@ export default {
       }
       return null;
     },
+
     refresh() {
       this.filters.t = +new Date();
       this.reload();
     },
+
     async next(link) {
       if (!this.filters.page) {
         this.filters.page = 1;
@@ -133,10 +145,12 @@ export default {
       }
       return await this.reload();
     },
+
     back() {
       this.filters.page = null;
       this.reload();
     },
+
     fetch(back) {
       if (back) {
         this.back();
@@ -144,6 +158,8 @@ export default {
         this.reload();
       }
     },
+
   },
+
 };
 </script>
