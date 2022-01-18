@@ -66,12 +66,7 @@ export default {
       let {name, api, isPublic} = this.resource;
       let data = null;
       try {
-        let subId;
-        let subPath;
-        if (this.subresource) {
-          subId = this.subresource.id;
-          subPath = this.subresource.path;
-        }
+        let {id: subId, name: subPath} = this.subresource || {}; 
         ({data} = await this.$api.res(name, api, isPublic).sub(subPath, subId).get(params));
         this.item = data;
       } catch(error) {
