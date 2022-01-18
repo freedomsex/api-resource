@@ -53,6 +53,10 @@ export default {
         params = _.assign({}, params, this.$route.query);
       }
       let data = null;
+
+      if (this.subresource) {
+        data = await this.loadSubresource(params);
+      } else 
       if (this.resource.params.id) {
         data = await this.loadItem(params);
       } else {
@@ -65,9 +69,8 @@ export default {
     async loadItem(params) {
       let {name, api, isPublic} = this.resource;
       let data = null;
-      try {
-        let {id: subId, name: subPath} = this.subresource || {}; 
-        ({data} = await this.$api.res(name, api, isPublic).sub(subPath, subId).get(params));
+      try { 
+        ({data} = await this.$api.res(name, api, isPublic).get(params));
         this.item = data;
       } catch(error) {
         this.error = error;
@@ -87,6 +90,30 @@ export default {
       let data = null;
       try {
         ({data} = await this.$api.res(name, api, isPublic).load(params));
+        if (this.infiniteListData) {
+          this.list.push(data);
+        } else {
+          this.list = data;
+        }
+      } catch(error) {
+        this.error = error;
+      } finally {
+        if (process.client) {
+          this.$nuxt.$loading.finish();
+        }
+        this.loading = false;
+        this.afterError();
+      }
+      this.afterLoad();
+      return data;
+    },
+
+    async loadSubresource(params) {
+      let {name, api, isPublic} = this.resource;
+      let {id: subId, name: subPath} = this.subresource || {}; 
+      let data = null;
+      try {
+        ({data} = await this.$api.res(name, api, isPublic).sub(subPath, subId).get(params));
         if (this.infiniteListData) {
           this.list.push(data);
         } else {
