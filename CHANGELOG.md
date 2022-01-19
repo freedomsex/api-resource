@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/freedomsex/api-resource/compare/2.5.0...2.6.0) (2022-01-19)
+
+
+### Features
+
+* alias store cache ([cdec651](https://github.com/freedomsex/api-resource/commit/cdec65173855b8ed65907c2db1926e202ccc403e))
+
 ## [2.5.0](https://github.com/freedomsex/api-resource/compare/2.4.28...2.5.0) (2022-01-18)
 
 
