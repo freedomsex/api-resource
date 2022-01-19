@@ -64,6 +64,14 @@ export default {
         this.cacheItem(name);
       }
     },
+
+    storeCacheItem(name) {
+      this.cacheItem(name);
+    },
+    storeCacheList(name) {
+      this.cacheList(name);
+    },
+
   },
 }
 </script>
