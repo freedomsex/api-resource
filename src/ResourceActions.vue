@@ -26,6 +26,8 @@ export default {
     subresource: null,
     list: [],
     item: {},
+    fixedList: null,
+    fixedItem: null,
     loading: false,
     error: false,
   }),
