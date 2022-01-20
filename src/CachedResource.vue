@@ -105,7 +105,7 @@ export default {
       this.loadCachedList(name);
     },
 
-    refreshCachedItem(id, name, hard) {
+    async refreshCachedItem(id, name, hard) {
       if (!hard) {
         this.reloadCachedItem(id, name);
       }
