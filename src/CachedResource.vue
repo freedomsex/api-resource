@@ -15,30 +15,17 @@ export default {
     cacheListKey(name) {
       return `cached-resource__${this.cacheName(name)}__list`;
     },
-    async restoreItem(name) {
+    restoreItem(name) {
       let key = this.cacheItemKey(this.resource.params.id, name);
-      this.item = await this.$cache.load(key, this.item);
+      this.item = this.$cache.load(key, this.item);
     },
-    async restoreList(name) {
+    restoreList(name) {
       let key = this.cacheListKey(name);
-      this.list = await this.$cache.load(key, this.list);
-    },
-
-    // TODO: Remove this alias after 3.0 - Deprecated
-    cacheItem(name) {
-      this.storeCachedItem(name);
-    },
-    cacheList(name) {
-      this.storeCachedList(name);
+      this.list = this.$cache.load(key, this.list);
     },
 
     async loadCached(id, name, force) {
-      if (id) {
-        this.resource.params.id = id;
-      } 
-      if (force || this.isTemplateList || !this.item.id) {
-        await this.restoreItem(name);
-      }
+      this.loadCachedItem(id, name, force); 
       if (force || !this.item.id) {
         await this.load();
       }
@@ -46,10 +33,9 @@ export default {
       this.storeCachedItem(name);
       return; 
     },
+
     async cachedList(name, force) {
-      if (force || this.isTemplateList || !this.list.length) {
-        await this.restoreList(name);
-      }
+      this.loadCachedList(name, force); 
       if (force || !this.list.length) {
         await this.load();
       }
@@ -57,6 +43,22 @@ export default {
       this.storeCachedList(name);
       return; 
     },
+
+
+    loadCachedList(name, force) {
+      if (force || this.isTemplateList || !this.list.length) {
+        this.restoreList(name);
+      }
+    },
+    loadCachedItem(id, name, force) {
+      if (id) {
+        this.resource.params.id = id;
+      } 
+      if (force || this.isTemplateList || !this.item.id) {
+        this.restoreItem(name);
+      }
+    },
+
 
     // TODO: Remove this alias after 3.0 - Deprecated
     preCacheList(name) {
@@ -75,6 +77,14 @@ export default {
       if (this.item && !this.isTemplateList) {
         this.storeCachedItem(name);
       }
+    },
+
+    // TODO: Remove this alias after 3.0 - Deprecated
+    cacheItem(name) {
+      this.storeCachedItem(name);
+    },
+    cacheList(name) {
+      this.storeCachedList(name);
     },
 
     storeCachedItem(name) {
