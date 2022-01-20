@@ -2,7 +2,40 @@
 
 Api Resource mixin for freedomsex project. Depend _axios_, _axios-rest-api_
 
+## Настройка
+
+Путем указания параметров DATA расширяемого компонетна.
+
+```js
+    resource: {
+      name: 'users', // Имя ресурса
+      isPublic: true, // Нужна ли авторизация
+      params: {
+        id: null // Идентификатор ресурса
+    },
+    subresource: {
+      name: 'invites' 
+      // Суб ресурс (/api/resurce_name/10/sub_resurce_name)
+      // Пример /api/users/10/likes
+    },
+```
+
+`resource.name` - если указвн, можно не указывать `name` в методах
+`resource.params.id` - если указан, можно не указывать `id` в методах
+
 ## Методы
+
+### Общие
+
+Если указан ID получает объект, иначе список. Онисание в методах далее
+
+**restoreData**([name]) - restoreItem|restoreList
+
+**storeCached**([name]) - storeCachedItem|storeCachedList
+
+**restoreCached**([name]) - restoreCachedItem|restoreCachedList
+
+**reloadCached**([id], [name]) - reloadCachedItem|reloadCachedList
 
 ### Ресурс
 
@@ -31,4 +64,3 @@ _async_ **restoreList**([name]) - получить список из кэша н
 **restoreCachedList**([name]) - сохранить список в кэш при условии, если есть и не шаблонный  
 
 _async_ **refreshCachedList**([name]) - загрузить несмотря ни на что и сохранить. `hard` - игнорировать существующие данные
-

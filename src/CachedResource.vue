@@ -15,6 +15,15 @@ export default {
     cacheListKey(name) {
       return `cached-resource__${this.cacheName(name)}__list`;
     },
+
+    restoreData(name) {
+      if (this.resource.params.id) {
+        this.restoreItem(name);
+      } else {
+        this.restoreList(name);
+      }
+    },
+
     restoreItem(name) {
       let key = this.cacheItemKey(this.resource.params.id, name);
       this.item = this.$cache.load(key, this.item);
@@ -68,6 +77,14 @@ export default {
       this.restoreCachedItem(name);
     },
 
+    restoreCached(name) {
+      if (this.resource.params.id) {
+        this.restoreCachedItem(name);
+      } else {
+        restoreCachedList(name);
+      }  
+    },
+
     restoreCachedList(name) {
       if (this.list.length && !this.isTemplateList) {
         this.storeCachedList(name);
@@ -87,6 +104,14 @@ export default {
       this.storeCachedList(name);
     },
 
+    storeCached(name) {
+      if (this.resource.params.id) {
+        this.storeCachedItem(name);
+      } else {
+        storeCachedList(name);
+      } 
+    },
+
     storeCachedItem(name) {
       let key = this.cacheItemKey(this.item.id, name);
       this.$cache.save(key, this.item);
@@ -96,6 +121,15 @@ export default {
       this.$cache.save(key, this.list);
     },
 
+
+    reloadCached(id, name) {
+      if (id) {
+        this.reloadCachedItem(id, name)
+      } else {
+        this.reloadCachedList(name);
+      }
+    },
+
     reloadCachedItem(id, name) {
       this.restoreCachedItem(name);
       this.loadCachedItem(id, name);
@@ -103,6 +137,15 @@ export default {
     reloadCachedList(name) {
       this.restoreCachedList(name);
       this.loadCachedList(name);
+    },
+
+    async refreshCached(id, name, hard) {
+      if (id) {
+        await this.reloadCachedItem(id, name, hard)
+      } else {
+        await this.reloadCachedList(name, hard);
+      }
+      return; 
     },
 
     async refreshCachedItem(id, name, hard) {
