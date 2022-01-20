@@ -34,14 +34,14 @@ export default {
     this.fillDummyItems();
   },
   methods: {
-    handleResource() {
-      this.load();
+    async handleResource() {
+      await this.load();
     },
-    watchQueryAction() {
-      !this.stopQueryWatch && this.onWatchQuery();
+    async watchQueryAction() {
+      !this.stopQueryWatch && await this.onWatchQuery();
     },
-    onWatchQuery() {
-      this.handleResource();
+    async onWatchQuery() {
+      await this.handleResource();
     },
     compareQueryFilters(query, before) {
       for (const param in query) {
