@@ -1,5 +1,5 @@
 <script>
-import _ from 'underscore';
+import { debounce, isObject } from 'underscore';
 
 import ResourceActions from './src/ResourceActions.vue';
 import ItemActions from './src/ItemActions.vue';
@@ -42,7 +42,7 @@ export default {
     },
     compareQueryFilters(query, before) {
       for (const param in query) {
-        if (_.isObject(query[param])) {
+        if (isObject(query[param])) {
           return this.compareQueryFilters(query[param], before[param]);
         } else {
           return query[param] !== before[param];
@@ -63,7 +63,7 @@ export default {
         this.isTemplateList = true;
       }
     },
-    suggest: _.debounce(function () {
+    suggest: debounce(function () {
       this.back();
     }, 700),
 

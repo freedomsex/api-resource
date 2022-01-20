@@ -1,5 +1,5 @@
 <script>
-import _ from 'underscore';
+import {isObject, mapObject, assign, omit } from 'underscore';
 
 export default {
   data: () => ({
@@ -39,9 +39,9 @@ export default {
       this.setFilters(filters);
     },
     clearFilters(filters) {
-      this.filters = _.mapObject(this.filters, (value) => {
-        if (_.isObject(value)) {
-          return _.mapObject(value, () => null);
+      this.filters = mapObject(this.filters, (value) => {
+        if (isObject(value)) {
+          return mapObject(value, () => null);
         }
         return null;
       });
@@ -51,14 +51,14 @@ export default {
       this.addFilters(filters, back);
     },
     setFilters(filters) {
-      this.filters = _.assign(this.filters, filters);
+      this.filters = assign(this.filters, filters);
     },
     addFilters(filters, back) {
       this.setFilters(filters);
       this.fetch(back);
     },
     skipFilters(filters, back) {
-      let omited = _.omit(this.filters, filters);
+      let omited = omit(this.filters, filters);
       this.filter(omited);
     },
   },

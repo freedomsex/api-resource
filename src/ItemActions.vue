@@ -1,5 +1,5 @@
 <script>
-import _ from 'underscore';
+import { map } from 'underscore';
 
 export default {
   methods: {
@@ -20,7 +20,7 @@ export default {
 
     changedItem(item, items) {
       let list = items || this.list;
-      _.map(list, (element, index) => {
+      map(list, (element, index) => {
         if (item.id == element.id) {
           this.rewriteItem(index, item, list);
         }
