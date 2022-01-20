@@ -24,6 +24,7 @@ export default {
     stopQueryWatch: false,
     ignoreFilters: false,
     infiniteListData: false,
+    watchQueryMetod: 'load',
   }),
   mixins: [
     ResourceActions,
@@ -38,7 +39,7 @@ export default {
       !this.stopQueryWatch && this.onWatchQuery();
     },
     onWatchQuery() {
-      this.load();
+      this[this.watchQueryMetod]();
     },
     compareQueryFilters(query, before) {
       for (const param in query) {
