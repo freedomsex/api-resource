@@ -23,17 +23,19 @@ export default {
       let key = this.cacheListKey(name);
       this.list = await this.$cache.load(key, this.list);
     },
+
+    // TODO: Remove this alias after 3.0 - Deprecated
     cacheItem(name) {
-      let key = this.cacheItemKey(this.item.id, name);
-      this.$cache.save(key, this.item);
+      this.storeCacheItem(name);
     },
     cacheList(name) {
-      let key = this.cacheListKey(name);
-      this.$cache.save(key, this.list);
+      this.storeCacheList(name);
     },
 
     async loadCached(id, name, force) {
-      this.resource.params.id = id;
+      if (id) {
+        this.resource.params.id = id;
+      } 
       if (force || this.isTemplateList || !this.item.id) {
         await this.restoreItem(name);
       }
@@ -41,7 +43,8 @@ export default {
         await this.load();
       }
       this.isTemplateList = false;
-      this.cacheItem(name);
+      this.storeCacheItem(name);
+      return; 
     },
     async cachedList(name, force) {
       if (force || this.isTemplateList || !this.list.length) {
@@ -51,25 +54,45 @@ export default {
         await this.load();
       }
       this.isTemplateList = false;
-      this.cacheList(name);
+      this.storeCacheList(name);
+      return; 
     },
 
+    // TODO: Remove this alias after 3.0 - Deprecated
     preCacheList(name) {
-      if (this.list.length && !this.isTemplateList) {
-        this.cacheList(name);
-      }
+      this.restoreCachedList(name);
     },
     preCacheItem(name) {
+      this.restoreCachedItem(name);
+    },
+
+    restoreCachedList(name) {
+      if (this.list.length && !this.isTemplateList) {
+        this.storeCacheList(name);
+      }
+    },
+    restoreCachedItem(name) {
       if (this.item && !this.isTemplateList) {
-        this.cacheItem(name);
+        this.storeCacheItem(name);
       }
     },
 
-    storeCacheItem(name) {
-      this.cacheItem(name);
+    storeCachedItem(name) {
+      let key = this.cacheItemKey(this.item.id, name);
+      this.$cache.save(key, this.item);
     },
-    storeCacheList(name) {
-      this.cacheList(name);
+    storeCachedList(name) {
+      let key = this.cacheListKey(name);
+      this.$cache.save(key, this.list);
+    },
+
+    async refreshCachedItem(name) {
+      await this.cachedItem(name, true);
+      return; 
+    },
+    async refreshCachedList(name) {
+      await this.cachedList(name, true);
+      return; 
     },
 
   },
