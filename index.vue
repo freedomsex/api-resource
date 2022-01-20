@@ -38,8 +38,11 @@ export default {
     watchQueryAction() {
       !this.stopQueryWatch && this.onWatchQuery();
     },
-    onWatchQuery() {
+    handleResource() {
       this[this.watchQueryMetod]();
+    },
+    onWatchQuery() {
+      this.handleResource();
     },
     compareQueryFilters(query, before) {
       for (const param in query) {
