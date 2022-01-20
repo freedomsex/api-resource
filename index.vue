@@ -24,7 +24,6 @@ export default {
     stopQueryWatch: false,
     ignoreFilters: false,
     infiniteListData: false,
-    watchQueryMetod: 'load',
   }),
   mixins: [
     ResourceActions,
@@ -35,11 +34,11 @@ export default {
     this.fillDummyItems();
   },
   methods: {
+    handleResource() {
+      this.load();
+    },
     watchQueryAction() {
       !this.stopQueryWatch && this.onWatchQuery();
-    },
-    handleResource() {
-      this[this.watchQueryMetod]();
     },
     onWatchQuery() {
       this.handleResource();
