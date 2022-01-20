@@ -26,10 +26,10 @@ export default {
 
     // TODO: Remove this alias after 3.0 - Deprecated
     cacheItem(name) {
-      this.storeCacheItem(name);
+      this.storeCachedItem(name);
     },
     cacheList(name) {
-      this.storeCacheList(name);
+      this.storeCachedList(name);
     },
 
     async loadCached(id, name, force) {
@@ -43,7 +43,7 @@ export default {
         await this.load();
       }
       this.isTemplateList = false;
-      this.storeCacheItem(name);
+      this.storeCachedItem(name);
       return; 
     },
     async cachedList(name, force) {
@@ -54,7 +54,7 @@ export default {
         await this.load();
       }
       this.isTemplateList = false;
-      this.storeCacheList(name);
+      this.storeCachedList(name);
       return; 
     },
 
@@ -68,12 +68,12 @@ export default {
 
     restoreCachedList(name) {
       if (this.list.length && !this.isTemplateList) {
-        this.storeCacheList(name);
+        this.storeCachedList(name);
       }
     },
     restoreCachedItem(name) {
       if (this.item && !this.isTemplateList) {
-        this.storeCacheItem(name);
+        this.storeCachedItem(name);
       }
     },
 
