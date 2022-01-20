@@ -141,9 +141,9 @@ export default {
 
     async refreshCached(id, name, hard) {
       if (id) {
-        await this.reloadCachedItem(id, name, hard)
+        await this.refreshCachedItem(id, name, hard)
       } else {
-        await this.reloadCachedList(name, hard);
+        await this.refreshCachedList(name, hard);
       }
       return; 
     },
