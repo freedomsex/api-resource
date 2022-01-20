@@ -109,7 +109,7 @@ export default {
       if (!hard) {
         this.reloadCachedItem(id, name);
       }
-      await this.cachedItem(name, true);
+      await this.loadCached(id, name, true);
       return; 
     },
     async refreshCachedList(name, hard) {
