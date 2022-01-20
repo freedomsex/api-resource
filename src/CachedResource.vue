@@ -96,11 +96,26 @@ export default {
       this.$cache.save(key, this.list);
     },
 
-    async refreshCachedItem(name) {
+    reloadCachedItem(id, name) {
+      this.restoreCachedItem(name);
+      this.loadCachedItem(id, name);
+    },
+    reloadCachedList(name) {
+      this.restoreCachedList(name);
+      this.loadCachedList(name);
+    },
+
+    refreshCachedItem(id, name, hard) {
+      if (!hard) {
+        this.reloadCachedItem(id, name);
+      }
       await this.cachedItem(name, true);
       return; 
     },
-    async refreshCachedList(name) {
+    async refreshCachedList(name, hard) {
+      if (!hard) {
+        this.reloadCachedList(name);
+      }
       await this.cachedList(name, true);
       return; 
     },
