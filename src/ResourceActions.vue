@@ -1,5 +1,5 @@
 <script>
-import _ from 'underscore';
+import { assign } from 'underscore';
 import Pruner from '@freedomsex/params-pruner';
 import ApiFilters from './ApiFilters.vue';
 import Hooks from './Hooks';
@@ -50,7 +50,7 @@ export default {
       this.beforeLoad();
       let { params } = this.resource;
       if (!ignoreFilters && !this.ignoreFilters) {
-        params = _.assign({}, params, this.$route.query);
+        params = assign({}, params, this.$route.query);
       }
       let data = null;
 
