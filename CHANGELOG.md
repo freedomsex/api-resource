@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.3](https://github.com/freedomsex/api-resource/compare/2.6.2...2.6.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* udrsc ([8bb0022](https://github.com/freedomsex/api-resource/commit/8bb002205229fb8b94ebf0b35fc94e56c51ea78f))
+
 ### [2.6.2](https://github.com/freedomsex/api-resource/compare/2.6.1...2.6.2) (2022-01-20)
 
 
