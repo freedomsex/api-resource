@@ -5,20 +5,20 @@ export default {
   methods: {
     async createItem(data) {
       let {name, api, isPublic, postPublic} = this.resource;
-      let public = isPublic && postPublic;
-      let {data: entity} = await this.$api.res(name, api, public).post(data);
+      let isPublicRequest = isPublic && postPublic;
+      let {data: entity} = await this.$api.res(name, api, isPublicRequest).post(data);
       return entity;
     },
     async updateItem(data, params, putPublic) {
       let {name, api, isPublic} = this.resource;
-      let public = isPublic && putPublic;
-      let {data: entity} = await this.$api.res(name, api, public).put(data, params);
+      let isPublicRequest = isPublic && putPublic;
+      let {data: entity} = await this.$api.res(name, api, isPublicRequest).put(data, params);
       return entity;
     },
     async removeItem(params, deletePublic) {
       let {name, api, isPublic} = this.resource;
-      let public = isPublic && deletePublic;
-      await this.$api.res(name, api, public).delete(params);
+      let isPublicRequest = isPublic && deletePublic;
+      await this.$api.res(name, api, isPublicRequest).delete(params);
     },
 
     changedItem(item, items) {
