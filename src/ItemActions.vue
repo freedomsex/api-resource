@@ -9,14 +9,14 @@ export default {
       let {data: entity} = await this.$api.res(name, api, isPublicRequest).post(data);
       return entity;
     },
-    async updateItem(data, params, putPublic) {
-      let {name, api, isPublic} = this.resource;
+    async updateItem(data, params) {
+      let {name, api, isPublic, putPublic} = this.resource;
       let isPublicRequest = isPublic && putPublic;
       let {data: entity} = await this.$api.res(name, api, isPublicRequest).put(data, params);
       return entity;
     },
-    async removeItem(params, deletePublic) {
-      let {name, api, isPublic} = this.resource;
+    async removeItem(params) {
+      let {name, api, isPublic, deletePublic} = this.resource;
       let isPublicRequest = isPublic && deletePublic;
       await this.$api.res(name, api, isPublicRequest).delete(params);
     },
