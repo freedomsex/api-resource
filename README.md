@@ -12,6 +12,7 @@ Api Resource mixin for freedomsex project. Depend _axios_, _axios-rest-api_
       isPublic: true, // Нужна ли авторизация
       params: {
         id: null // Идентификатор ресурса
+      },
     },
     subresource: {
       name: 'invites' 
@@ -37,6 +38,8 @@ Api Resource mixin for freedomsex project. Depend _axios_, _axios-rest-api_
 
 **reloadCached**([id], [name]) - reloadCachedItem|reloadCachedList
 
+**refreshCached**([id], [name], [hard]) - refreshCachedItem|refreshCachedList
+
 ### Ресурс
 
 _async_ **loadCached**([id], [name], [force]) - получить объект по ID из кэша или загрузить если отсутствует. `force` - загрузить несмотря ни на что
@@ -47,7 +50,7 @@ _async_ **restoreItem**([name]) - получить объект из кэша н
 
 **restoreCachedItem**([name]) - сохранить список в кэш при условии, если есть и не шаблонный  
 
-_async_ **refreshCachedItem**([id], [name]) - загрузить несмотря ни на что и сохранить. `hard` - игнорировать существующие данные
+_async_ **refreshCachedItem**([id], [name], [hard]) - загрузить несмотря ни на что и сохранить. `hard` - игнорировать существующие данные
 
 ### Список
 
@@ -63,10 +66,18 @@ _async_ **restoreList**([name]) - получить список из кэша н
 
 **restoreCachedList**([name]) - сохранить список в кэш при условии, если есть и не шаблонный  
 
-_async_ **refreshCachedList**([name]) - загрузить несмотря ни на что и сохранить. `hard` - игнорировать существующие данные
+_async_ **refreshCachedList**([name], [hard]) - загрузить несмотря ни на что и сохранить. `hard` - игнорировать существующие данные
 
 ## Костыли
 
 **handleResource**() - метод загрузки по умолчанию. Default: `load` - не кэширующая загрузка. Можно заменить на `refreshCached`
 
 **onWatchQuery**() - метод вызываемый при изменении строки адреса. Default: `handleResource`
+
+```
+      isPublic: false,
+      getPublic: false,
+      putPublic: false,
+      postPublic: false,
+      deletePublic: false,
+```

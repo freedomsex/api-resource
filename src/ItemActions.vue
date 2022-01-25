@@ -4,18 +4,21 @@ import { map } from 'underscore';
 export default {
   methods: {
     async createItem(data) {
-      let {name, api} = this.resource;
-      let {data: entity} = await this.$api.res(name, api).post(data);
+      let {name, api, isPublic, postPublic} = this.resource;
+      let public = isPublic && postPublic;
+      let {data: entity} = await this.$api.res(name, api, public).post(data);
       return entity;
     },
-    async updateItem(data, params) {
-      let {name, api} = this.resource;
-      let {data: entity} = await this.$api.res(name, api).put(data, params);
+    async updateItem(data, params, putPublic) {
+      let {name, api, isPublic} = this.resource;
+      let public = isPublic && putPublic;
+      let {data: entity} = await this.$api.res(name, api, public).put(data, params);
       return entity;
     },
-    async removeItem(params) {
-      let {name, api} = this.resource;
-      await this.$api.res(name, api).delete(params);
+    async removeItem(params, deletePublic) {
+      let {name, api, isPublic} = this.resource;
+      let public = isPublic && deletePublic;
+      await this.$api.res(name, api, public).delete(params);
     },
 
     changedItem(item, items) {
