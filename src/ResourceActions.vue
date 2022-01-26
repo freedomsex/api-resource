@@ -1,5 +1,5 @@
 <script>
-import { assign } from 'underscore';
+import { assign, union } from 'underscore';
 import Pruner from '@freedomsex/params-pruner';
 import ApiFilters from './ApiFilters.vue';
 import Hooks from './Hooks';
@@ -120,8 +120,8 @@ export default {
       let data = null;
       try {
         ({data} = await this.$api.res(name, api, isPublic).sub(subPath, subId).get(params));
-        if (this.infiniteListData) {
-          this.list.push(data);
+        if (this.infiniteListData) { 
+          this.list = union(this.list, data);
         } else {
           this.list = data;
         }
