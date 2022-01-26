@@ -96,8 +96,8 @@ export default {
       let data = null;
       try {
         ({data} = await this.$api.res(name, api, isPublic).load(params));
-        if (this.infiniteListData) {
-          this.list.push(data);
+        if (this.infiniteListData) { 
+          this.list = union(this.list, data);
         } else {
           this.list = data;
         }
